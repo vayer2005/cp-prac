@@ -11,16 +11,15 @@ using namespace std;
 int a; int b; int c;
 void solve() {
     cin >> a >> b >> c;
-    int adds = 0;
-    while (adds < 5) {
-        if (a <= b && a <= c) {
-            a++;
-        } else if (b <= c && b <= a) {
-            b++;
-        } else if (c <= a && c <= b) {
-            c++;
-        }
-        adds++;
+
+    for (int i = 0; i < 5; i++) {
+        if (a <= b & a <= c) {
+            a += 1;
+        } else if (b <= a & b <= c) {
+            b+=1;
+        } else {
+            c+=1;
+        } 
     }
 
     cout << a * b * c << endl;

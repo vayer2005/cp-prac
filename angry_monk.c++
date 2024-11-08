@@ -11,14 +11,14 @@ using namespace std;
 long long n; int k;
 void solve() {
     cin >> n >> k;
-    long long currNum;
     long long maxVal = 0;
+    long long currval;
     for (int i = 0; i < k; i++) {
-        cin >> currNum;
-        maxVal = max(maxVal, currNum);
+        cin >> currval;
+        maxVal = max(maxVal, currval);
     }
 
-    cout <<  2 * (n - maxVal) - (k-1) << endl;
+    cout << (n - maxVal) + (n - maxVal) - (k - 1) << endl;
     
 }
 

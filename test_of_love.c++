@@ -13,41 +13,43 @@ void solve() {
     cin >> n >> m >> k;
     cin >> s;
 
-    s = 'L' + s + 'L';
-    vector<bool> res(n+2, false);
-    res[n+1] = true;
-    int swimDist = 0;
+    s = "L" + s + "L";
+    long long currInd = 0;
+    long long swimDist = 0;
+    while (currInd < n + 1) {
 
-    for (int i = n; i > -1; i--) {
-        if (s[i] == 'C') {
-            res[i] = false;
-            continue;
+        if ((swimDist == k & s[currInd] == 'W') || s[currInd] == 'C') {
+            cout << "NO" << endl;
+            break;
         }
-        if (s[i] == 'L') {
-            for (int j = i+1; j <= min(i+m, int(res.size())-1); j++) {
-                res[i] = res[i] or res[j];
+        long long furthestLog = -1;
+        for (int i = currInd+1; i <= currInd + m; i++) {
+            if (s[i] == 'L') {
+                furthestLog = i;
             }
-        } else if (s[i] == 'W') {
-            
-            for (int j = i+1; j <= min(i+k, int(res.size())-1); j++) {
-                if (s[j] == 'C') {
+        }
+        if (furthestLog != -1) {
+            currInd = furthestLog;
+        } else {
+            //Swim as far as can
+            currInd += m;
+            while (swimDist < k) {
+                if (s[currInd] == 'L') {
                     break;
-                }
-                if (res[j] && swimDist + j - i <= k) {
-                    res[i] = true;
-                    swimDist+=j-i;
-                    continue;
-                }
+                } else if (s[currInd] == 'C') {
+                    break;
+                } else {
+                    currInd += 1;
+                    swimDist += 1;
+                }    
+                
             }
         }
     }
-
-    if (res[0]) {
+    if (currInd >= n+1) {
         cout << "YES" << endl;
-    } else {
-        cout << "NO" << endl;
     }
-    
+
 }
 
 int main() {
