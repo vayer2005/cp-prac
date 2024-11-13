@@ -14,6 +14,7 @@ int main() {
     int curr;
     bool possible = true;
     cin >> n;
+    
     for (int i = 0; i < n; i++) {
         cin >> curr;
         if (vals.find(curr) != vals.end()) {
